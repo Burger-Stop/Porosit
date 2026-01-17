@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Untitled</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BURGER-STOP | Porosit Tani</title>
+    
+    <!-- FontAwesome për ikona -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- PËRGATITJA E PËRGJITHSHME --- */
+        :root {
+            --primary-color: #ff9f1c;
+            --secondary-color: #e71d36;
+            --dark-bg: #121212;
+            --light-text: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* --- PRELOADER --- */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--dark-bg); 
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-wrapper {
+            text-align: center;
+        }
+
+        .burger-icon {
+            font-size: 5rem; 
+            color: var(--primary-color);
+            animation: burgerBounce 1.5s infinite ease-in-out;
+            display: inline-block;
+        }
+
+        .line-container {
+            width: 150px;
+            height: 4px;
+            background: #333;
+            margin-top: 25px;
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loading-line {
+            width: 50%;
+            height: 100%;
+            background: #ffffff;
+            position: absolute;
+            left: -50%;
+            animation: loadingRun 1.5s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
+        }
+
+        @keyframes burgerBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-15px) scale(1.1); }
+        }
+
+        @keyframes loadingRun {
+            0% { left: -50%; }
+            100% { left: 100%; }
+        }
+
+
+        /* --- HEADER --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            z-index: 10;
+        }
+
+        /* Ikonat Sociale - LARTËSUARA */
+        .social-icons {
+            display: flex;
+            gap: 20px;
+            align-self: flex-start;
+            margin-top: -5px; 
+        }
+
+        .social-icons a {
+            color: var(--light-text);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            color: var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        /* LOGOJA - E NDRYSHUAR LART PËR PC (30px) */
+        .logo {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 30px; 
+            max-height: 150px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 130px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .header-spacer {
+            width: 150px;
+        }
+
+        /* --- SECTION KRYESORE --- */
+        .hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            background: url('https://wallpapercat.com/w/full/0/7/5/585066-3840x2160-desktop-4k-hamburger-background.jpg') no-repeat center center/cover;
+            padding: 20px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            animation: fadeIn Up 1s ease-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .hero h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-btn {
+            background-color: var(--primary-color);
+            color: #000;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            padding: 12px 40px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 159, 28, 0.4);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .cta-btn:hover {
+            background-color: #fff;
+            transform: translateY(-3px);
+        }
+
+        /* --- STYLE I RI: LOKACIONI --- */
+        .location-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .location-display i {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: #1e1e1e;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            transform: scale(0.8);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid #333;
+            position: relative;
+            padding-top: 50px; 
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: #777;
+            cursor: pointer;
+            transition: color 0.3s;
+            z-index: 110;
+        }
+
+        .close-btn:hover {
+            color: #fff;
+        }
+
+        .contact-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.2s;
+            color: white;
+        }
+
+        .contact-btn i {
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+
+        .contact-btn:hover {
+            transform: scale(1.02);
+        }
+
+        .btn-viber { background-color: #7360f2; }
+        .btn-call { background-color: #3498db; }
+
+        /* --- RESPONSIVE (PËR TELEFON) --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.5rem; }
+            .location-display { font-size: 1.5rem; }
+            
+            /* LOGOJA NË TELEFON (MBETET E NJËJTË) */
+            .logo { top: 40px; max-height: 100px; }
+            .logo-img { height: 80px; }
+
+            /* PËRSHTATJA E TEKSTIT PËR TELEFON */
+            .hero-content { margin-top: 20px; }
+            
+            header { flex-direction: column; gap: 10px; padding-top: 10px; }
+            .header-spacer { display: none; }
+            
+            .social-icons { 
+                margin-top: 5px; 
+                align-self: center;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PRELOADER (Loading Hamburger & Line) -->
+    <div class="preloader" id="preloader">
+        <div class="loader-wrapper">
+            <i class="fas fa-hamburger burger-icon"></i>
+            <div class="line-container">
+                <div class="loading-line"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <!-- LINKËT E RRAJETEVE SOCIALE -->
+        <div class="social-icons">
+            <a href="https://www.facebook.com/burgerstop.fk" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/burgerstop_01/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@burgerstop_01" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+        </div>
+
+        <div class="logo">
+            <img src="https://i.ibb.co/d4wzw86J/photo-5429452928826676184-x-Photoroom.png" alt="Logo Burger Stop" class="logo-img">
+        </div>
+
+        <div class="header-spacer"></div>
+    </header>
+
+    <!-- SECTION KRYESORE -->
+    <main class="hero">
+        <div class="hero-content">
+            <h1>AJE I URITUR<br>MOS PRIT KLIKO POSHT E POROSIT</h1>
+            <p>Burgeret më të freskëta dhe më të shijshme në qytet.</p>
+            
+            <button id="openOrderBtn" class="cta-btn">
+                Porosit Tani <i class="fas fa-hamburger"></i>
+            </button>
+
+            <div class="location-display">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>FUSHË KOSOVË</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- MODAL (PA WHATSAPP) -->
+    <div class="modal-overlay" id="orderModal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeOrderBtn">&times;</span>
+            
+            <div class="contact-options">
+                <!-- WHATSAPP ËSHTË HEQUR -->
+                
+                <a href="viber://chat?number=%2B38348884554" class="contact-btn btn-viber">
+                    <i class="fab fa-viber"></i> Viber
+                </a>
+                
+                <a href="tel:+38348884554" class="contact-btn btn-call">
+                    <i class="fas fa-phone-alt"></i> Thirr Tani
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+        const preloader = document.getElementById('preloader');
+        
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                preloader.classList.add('hidden');
+            }, 2500); 
+        });
+
+        const openBtn = document.getElementById('openOrderBtn');
+        const closeBtn = document.getElementById('closeOrderBtn');
+        const modal = document.getElementById('orderModal');
+
+        openBtn.addEventListener('click', () => {
+            modal.classList.add('active');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+    </script>
+
+</body>
+</html>
+    
+  </body>
+  
+</html>
